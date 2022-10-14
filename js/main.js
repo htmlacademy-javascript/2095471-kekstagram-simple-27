@@ -1,21 +1,16 @@
 // Источник  https://learn.javascript.ru/task/random-int-min-max
 
-function randomInteger(min, max) {
+function getRandomInteger(min, max) {
   if (min < 0 || max < 0) {
-    return NaN
+    return NaN;
   }
-  let rand = min + Math.random() * (max + 1 - min);
+  const rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 }
 
-function stringLength (string, length) {
-  if (length <= 140) {
-    return true;
-  }
-  else{
-    return false;
-  }
+function checkStringLength (string, maxLength) {
+  return string.length <= maxLength;
 }
 
-randomInteger(4, 9)
-stringLength ('', 10)
+getRandomInteger(4, 9);
+checkStringLength(' ', 140);
