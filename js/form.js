@@ -39,10 +39,8 @@ pictureForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Отправлено успешно');
-  } else {
-    console.log('Ошибка, попробуйте еще');
+  if (!isValid) {
+    evt.preventDefault();
   }
 });
 
