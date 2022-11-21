@@ -1,5 +1,6 @@
 import {isEscapeKey} from './util.js';
-import './miniatures.js';
+import {reloadScale} from './scale.js';
+import {reloadEffect} from './effects.js';
 
 const body = document.body;
 const uploadPhoto = document.querySelector('#upload-file');
@@ -19,6 +20,8 @@ function closePictureEditor() {
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEditorEscKeydown);
   uploadPhoto.value = '';
+  reloadScale ();
+  reloadEffect();
 }
 
 const openPictureEditor = () => uploadPhoto.addEventListener('change', () => {
