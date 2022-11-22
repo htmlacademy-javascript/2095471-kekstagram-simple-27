@@ -35,7 +35,9 @@ const reloadScale = () => {
   scalePic();
 };
 
-smallButton.addEventListener('click', onSmallButtonClick);
-bigButton.addEventListener('click', onBigButtonClick);
+const initScale = () => {
+  smallButton.addEventListener('click', onSmallButtonClick);
+  bigButton.addEventListener('click', onBigButtonClick);
+};
 
-export {reloadScale};
+export {initScale, reloadScale};
