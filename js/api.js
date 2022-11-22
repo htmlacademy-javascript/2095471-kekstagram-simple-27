@@ -2,7 +2,7 @@ import {showAlert} from './util.js';
 
 const getData = (onSuccess) => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
-    .then((responce) => responce.json())
+    .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
     })
@@ -17,8 +17,8 @@ const sendData = (onSuccess, onFail, body) => {
       body,
     },
   )
-    .then((responce) => {
-      if (responce.ok) {
+    .then((response) => {
+      if (response.ok) {
         onSuccess();
         return;
       }

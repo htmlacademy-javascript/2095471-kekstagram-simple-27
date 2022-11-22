@@ -1,7 +1,8 @@
-import {isEscapeKey, showAlert} from './util.js';
+import {isEscapeKey} from './util.js';
 import {reloadScale, initScale} from './scale.js';
 import {reloadEffect, createSlider, updateSlider, onSliderUpdate, onPictureFormChange} from './effects.js';
 import {sendData} from './api.js';
+import {showErrorMessage, showSuccessMessage} from './message.js';
 
 
 const body = document.body;
@@ -68,13 +69,14 @@ const formSubmit = (onSuccess) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      sendData(
+      sendData (
         () => {
           onSuccess();
           unblockSubmitButton();
+          showSuccessMessage();
         },
         () => {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          showErrorMessage();
           unblockSubmitButton();
         },
         new FormData(evt.target),

@@ -3,12 +3,13 @@ const imageTemplate = document.querySelector('#picture').content.querySelector('
 
 const createPictures = (photos) => {
   const imageFragment = document.createDocumentFragment();
-  photos.forEach(({url, likes, comments}) => {
-    const image = imageTemplate.cloneNode(true);
-    image.querySelector('.picture__img').src = url;
-    image.querySelector('.picture__comments').textContent = comments;
-    image.querySelector('.picture__likes').textContent = likes;
-    image.appendChild(image);
+  photos.forEach(({url, likes, comments, description}) => {
+    const imageElement = imageTemplate.cloneNode(true);
+    imageElement.querySelector('.picture__img').src = url;
+    imageElement.querySelector('.picture__img').alt = description;
+    imageElement.querySelector('.picture__comments').textContent = comments;
+    imageElement.querySelector('.picture__likes').textContent = likes;
+    imageFragment.appendChild(imageElement);
   });
   imageContainer.appendChild(imageFragment);
 };
