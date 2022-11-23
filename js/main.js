@@ -1,8 +1,6 @@
 import {createPictures} from './miniatures.js';
-import {initUploadPhoto, closePictureEditor, formSubmit} from './form.js';
+import {initUploadPhoto} from './form.js';
 import {getData} from './api.js';
-import './scale.js';
-import './effects.js';
 
 const PICTURE_COUNT = 25;
 
@@ -11,4 +9,3 @@ getData((photos) => {
 });
 
 initUploadPhoto();
-formSubmit(closePictureEditor);
