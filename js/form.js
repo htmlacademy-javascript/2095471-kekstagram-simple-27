@@ -13,6 +13,12 @@ const keyCloseEditor = document.querySelector('.img-upload__cancel');
 const effectSliderElement = document.querySelector('.effect-level__slider');
 const submitButton = form.querySelector('.img-upload__submit');
 
+const pristine = new Pristine(form, {
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
+  errorTextClass: 'text__description-text',
+});
+
 const onEditorEscKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
@@ -31,28 +37,6 @@ function closePictureEditor() {
   reloadEffect();
 }
 
-const initUploadPhoto = () => {
-  uploadPhoto.addEventListener('change', () => {
-    overlayElement.classList.remove('hidden');
-    body.classList.add('modal-open');
-
-    createSlider();
-    updateSlider();
-    initScale();
-
-    form.addEventListener('change', onPictureFormChange);
-    effectSliderElement.noUiSlider.on('update', onSliderUpdate);
-    document.addEventListener('keydown', onEditorEscKeydown);
-    keyCloseEditor.addEventListener('click', closePictureEditor);
-  });
-};
-
-const pristine = new Pristine(form, {
-  classTo: 'img-upload__text',
-  errorTextParent: 'img-upload__text',
-  errorTextClass: 'text__description-text',
-});
-
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Публикую...';
@@ -63,7 +47,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-const formSubmit = (onSuccess) => {
+const initFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -83,5 +67,21 @@ const formSubmit = (onSuccess) => {
       );
     }});
 };
+const initUploadPhoto = () => {
+  uploadPhoto.addEventListener('change', () => {
+    overlayElement.classList.remove('hidden');
+    body.classList.add('modal-open');
 
-export {initUploadPhoto, formSubmit, closePictureEditor};
+    createSlider();
+    updateSlider();
+    initScale();
+
+    form.addEventListener('change', onPictureFormChange);
+    effectSliderElement.noUiSlider.on('update', onSliderUpdate);
+    document.addEventListener('keydown', onEditorEscKeydown);
+    keyCloseEditor.addEventListener('click', closePictureEditor);
+    initFormSubmit(closePictureEditor);
+  });
+};
+
+export {initUploadPhoto, closePictureEditor};
