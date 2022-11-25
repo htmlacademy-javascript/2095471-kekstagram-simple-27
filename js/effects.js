@@ -1,7 +1,3 @@
-const picture = document.querySelector('.img-upload__preview img');
-const levelSlider = document.querySelector('.effect-level__slider');
-const effectLevel = document.querySelector('.effect-level__value');
-
 const EFFECTS = [
   {
     name: 'none',
@@ -59,6 +55,10 @@ const EFFECTS = [
   },
 ];
 
+const picture = document.querySelector('.img-upload__preview img');
+const levelSlider = document.querySelector('.effect-level__slider');
+const effectLevel = document.querySelector('.effect-level__value');
+
 const DEFAULT_EFFECT = EFFECTS[0];
 let selectedEffect = DEFAULT_EFFECT;
 
@@ -81,7 +81,7 @@ const updateSlider = () => {
 };
 
 const onPictureFormChange = (evt) => {
-  if(!evt.target.classList.contains('effects__radio')) {
+  if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
   selectedEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
@@ -93,7 +93,7 @@ const onSliderUpdate = () => {
   picture.style.filter = 'none';
   picture.className = '';
   levelSlider.value = '';
-  if(isDefault()) {
+  if (isDefault()) {
     return;
   }
 

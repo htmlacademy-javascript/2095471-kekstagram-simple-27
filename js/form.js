@@ -8,10 +8,9 @@ import {showErrorMessage, showSuccessMessage} from './message.js';
 const body = document.body;
 const form = document.querySelector('#upload-select-image');
 const uploadPhoto = document.querySelector('#upload-file');
-
-const overlay = document.querySelector('.img-upload__overlay');
-const onKeyCloseEditor = document.querySelector('.img-upload__cancel');
-const effectSlider = document.querySelector('.effect-level__slider');
+const overlayElement = document.querySelector('.img-upload__overlay');
+const keyCloseEditor = document.querySelector('.img-upload__cancel');
+const effectSliderElement = document.querySelector('.effect-level__slider');
 const submitButton = form.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form, {
@@ -19,14 +18,6 @@ const pristine = new Pristine(form, {
   errorTextParent: 'img-upload__text',
   errorTextClass: 'text__description-text',
 });
-
-const clearErrorMessages = () => {
-  const errorMessage = document.querySelector('pristine-error');
-
-  if(errorMessage) {
-    errorMessage.innerHTML = '';
-  }
-};
 
 const onEditorEscKeydown = (evt) => {
   if(isEscapeKey(evt)) {
@@ -37,13 +28,12 @@ const onEditorEscKeydown = (evt) => {
 
 function closePictureEditor() {
   form.reset();
-  clearErrorMessages();
-  overlay.classList.add('hidden');
+  overlayElement.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEditorEscKeydown);
-  onKeyCloseEditor.removeEventListener('click', closePictureEditor);
+  keyCloseEditor.removeEventListener('click', closePictureEditor);
   uploadPhoto.value = '';
-  reloadScale();
+  reloadScale ();
   reloadEffect();
 }
 
@@ -79,7 +69,7 @@ const initFormSubmit = (onSuccess) => {
 };
 const initUploadPhoto = () => {
   uploadPhoto.addEventListener('change', () => {
-    overlay.classList.remove('hidden');
+    overlayElement.classList.remove('hidden');
     body.classList.add('modal-open');
 
     createSlider();
@@ -87,10 +77,9 @@ const initUploadPhoto = () => {
     initScale();
 
     form.addEventListener('change', onPictureFormChange);
-    effectSlider.noUiSlider.on('update', onSliderUpdate);
+    effectSliderElement.noUiSlider.on('update', onSliderUpdate);
     document.addEventListener('keydown', onEditorEscKeydown);
-    
-    onKeyCloseEditor.addEventListener('click', closePictureEditor);
+    keyCloseEditor.addEventListener('click', closePictureEditor);
     initFormSubmit(closePictureEditor);
   });
 };
