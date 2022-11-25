@@ -13,7 +13,7 @@ const onMessageEscKeydown = (evt) => {
 };
 
 const onOverlayClick = (evt) => {
-  if (!evt.target.classList.contains('error__inner')) {
+  if(!evt.target.classList.contains('error__inner')) {
     closeMessage();
   }
 };

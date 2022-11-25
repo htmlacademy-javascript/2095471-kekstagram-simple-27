@@ -8,11 +8,11 @@ import {showErrorMessage, showSuccessMessage} from './message.js';
 const body = document.body;
 const form = document.querySelector('#upload-select-image');
 const uploadPhoto = document.querySelector('#upload-file');
+
 const overlay = document.querySelector('.img-upload__overlay');
 const onKeyCloseEditor = document.querySelector('.img-upload__cancel');
 const effectSlider = document.querySelector('.effect-level__slider');
 const submitButton = form.querySelector('.img-upload__submit');
-
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
@@ -89,6 +89,7 @@ const initUploadPhoto = () => {
     form.addEventListener('change', onPictureFormChange);
     effectSlider.noUiSlider.on('update', onSliderUpdate);
     document.addEventListener('keydown', onEditorEscKeydown);
+    
     onKeyCloseEditor.addEventListener('click', closePictureEditor);
     initFormSubmit(closePictureEditor);
   });
