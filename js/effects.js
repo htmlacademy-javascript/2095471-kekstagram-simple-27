@@ -1,7 +1,3 @@
-const picture = document.querySelector('.img-upload__preview img');
-const levelSlider = document.querySelector('.effect-level__slider');
-const effectLevel = document.querySelector('.effect-level__value');
-
 const EFFECTS = [
   {
     name: 'none',
@@ -59,6 +55,11 @@ const EFFECTS = [
   },
 ];
 
+const picture = document.querySelector('.img-upload__preview img');
+const pictureForm = document.querySelector('.img-upload__form');
+const levelSlider = document.querySelector('.effect-level__slider');
+const effectLevel = document.querySelector('.effect-level__value');
+
 const DEFAULT_EFFECT = EFFECTS[0];
 let selectedEffect = DEFAULT_EFFECT;
 
@@ -80,8 +81,8 @@ const updateSlider = () => {
   }
 };
 
-const onPictureFormChange = (evt) => {
-  if (!evt.target.classList.contains('effects__radio')) {
+const onpictureFormChange = (evt) => {
+  if (!evt.target.classList.contains('effects_radio')) {
     return;
   }
   selectedEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
@@ -106,26 +107,21 @@ const onSliderUpdate = () => {
 const reloadEffect = () => {
   selectedEffect = DEFAULT_EFFECT;
   updateSlider();
-  levelSlider.noUiSlider.destroy();
 };
 
-const createSlider = () => {
-  noUiSlider.create(levelSlider, {
-    range: {
-      'min': DEFAULT_EFFECT.min,
-      'max': DEFAULT_EFFECT.max,
-    },
-    step: DEFAULT_EFFECT.step,
-    start: DEFAULT_EFFECT.max,
-    connect: 'lower',
-  });
-};
+noUiSlider.create(levelSlider, {
+  range: {
+    'min': DEFAULT_EFFECT.min,
+    'max': DEFAULT_EFFECT.max,
+  },
+  step: DEFAULT_EFFECT.step,
+  start: DEFAULT_EFFECT.max,
+  connect: 'lower',
+});
+updateSlider();
 
 
-export {
-  updateSlider,
-  createSlider,
-  reloadEffect,
-  onPictureFormChange,
-  onSliderUpdate,
-};
+pictureForm.addEventListener('change', onpictureFormChange);
+levelSlider.noUiSlider.on('update', onSliderUpdate);
+
+export {reloadEffect};
