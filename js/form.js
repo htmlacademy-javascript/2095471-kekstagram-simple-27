@@ -89,7 +89,6 @@ const initUploadPhoto = () => {
     form.addEventListener('change', onPictureFormChange);
     effectSlider.noUiSlider.on('update', onSliderUpdate);
     document.addEventListener('keydown', onEditorEscKeydown);
-    
     onKeyCloseEditor.addEventListener('click', closePictureEditor);
     initFormSubmit(closePictureEditor);
   });

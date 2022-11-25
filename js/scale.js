@@ -16,7 +16,7 @@ const scalePic = (value = DEFAULT_SCALE) => {
 const onSmallButtonClick = () => {
   const currentValue = parseInt(scalePicture.value, 10);
   let newValue = currentValue - SCALE_STEP;
-  if (newValue < SCALE_STEP) {
+  if(newValue < SCALE_STEP) {
     newValue = MINIMAL_SCALE;
   }
   scalePic(newValue);
@@ -25,7 +25,7 @@ const onSmallButtonClick = () => {
 const onBigButtonClick = () => {
   const currentValue = parseInt(scalePicture.value, 10);
   let newValue = currentValue + SCALE_STEP;
-  if (newValue > SCALE_STEP) {
+  if(newValue > SCALE_STEP) {
     newValue = MAXIMAL_SCALE;
   }
   scalePic(newValue);
