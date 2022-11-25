@@ -23,5 +23,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-
 export {isEscapeKey, showAlert};
