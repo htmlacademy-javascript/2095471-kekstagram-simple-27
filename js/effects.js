@@ -122,10 +122,4 @@ const createSlider = () => {
 };
 
 
-export {
-  updateSlider,
-  createSlider,
-  reloadEffect,
-  onPictureFormChange,
-  onSliderUpdate,
-};
+export {updateSlider, createSlider, reloadEffect, onPictureFormChange, onSliderUpdate};
