@@ -81,7 +81,7 @@ const updateSlider = () => {
 };
 
 const onPictureFormChange = (evt) => {
-  if (!evt.target.classList.contains('effects__radio')) {
+  if(!evt.target.classList.contains('effects__radio')) {
     return;
   }
   selectedEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
@@ -93,7 +93,7 @@ const onSliderUpdate = () => {
   picture.style.filter = 'none';
   picture.className = '';
   levelSlider.value = '';
-  if (isDefault()) {
+  if(isDefault()) {
     return;
   }
 

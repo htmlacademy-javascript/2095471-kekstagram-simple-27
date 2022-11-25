@@ -61,7 +61,7 @@ const initFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
-    if (isValid) {
+    if(isValid) {
       blockSubmitButton();
       sendData (
         () => {

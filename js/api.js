@@ -1,4 +1,5 @@
 import {showAlert} from './util.js';
+
 const getServer = 'https://27.javascript.pages.academy/kekstagram-simple/data';
 const postServer = 'https://27.javascript.pages.academy/kekstagram-simple';
 
@@ -20,7 +21,7 @@ const sendData = (onSuccess, onFail, body) => {
     },
   )
     .then((response) => {
-      if (response.ok) {
+      if(response.ok) {
         onSuccess();
         return;
       }
