@@ -83,8 +83,8 @@ const initUploadPhoto = () => {
     body.classList.add('modal-open');
 
     createSlider();
-    updateSlider();
     initScale();
+    updateSlider();
 
     form.addEventListener('change', onPictureFormChange);
     effectSlider.noUiSlider.on('update', onSliderUpdate);
