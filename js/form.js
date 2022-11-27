@@ -22,10 +22,7 @@ const pristine = new Pristine(form, {
 
 const clearErrorMessages = () => {
   const errorMessage = document.querySelector('.pristine-error');
-
-  if(errorMessage) {
-    errorMessage.innerHTML = '';
-  }
+  errorMessage.innerHTML = '';
 };
 
 const onEditorEscKeydown = (evt) => {
