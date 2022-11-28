@@ -22,7 +22,10 @@ const pristine = new Pristine(form, {
 
 const clearErrorMessages = () => {
   const errorMessage = document.querySelector('.pristine-error');
-  errorMessage.innerHTML = '';
+
+  if(errorMessage) {
+    errorMessage.innerHTML = '';
+  }
 };
 
 const onEditorEscKeydown = (evt) => {
@@ -34,6 +37,7 @@ const onEditorEscKeydown = (evt) => {
 
 function onClosePictureEditor() {
   form.reset();
+  form.removeEventListener('submit', onSubmit);
   clearErrorMessages();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -54,26 +58,30 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-const initFormSubmit = (onSuccess) => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-    if(isValid) {
-      blockSubmitButton();
-      sendData (
-        () => {
-          onSuccess();
-          showSuccessMessage();
-          unblockSubmitButton();
-        },
-        () => {
-          showErrorMessage();
-          unblockSubmitButton();
-        },
-        new FormData(evt.target),
-      );
-    }});
+function onSubmit(evt) {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if(isValid) {
+    blockSubmitButton();
+    sendData (
+      () => {
+        onClosePictureEditor();
+        showSuccessMessage();
+        unblockSubmitButton();
+      },
+      () => {
+        showErrorMessage();
+        unblockSubmitButton();
+      },
+      new FormData(evt.target),
+    );
+  }
+}
+
+const initFormSubmit = () => {
+  form.addEventListener('submit', onSubmit);
 };
+
 const initUploadPhoto = () => {
   uploadPhoto.addEventListener('change', () => {
     overlay.classList.remove('hidden');
@@ -87,7 +95,7 @@ const initUploadPhoto = () => {
     effectSlider.noUiSlider.on('update', onSliderUpdate);
     document.addEventListener('keydown', onEditorEscKeydown);
     keyCloseEditor.addEventListener('click', onClosePictureEditor);
-    initFormSubmit(onClosePictureEditor);
+    initFormSubmit();
   });
 };
 
