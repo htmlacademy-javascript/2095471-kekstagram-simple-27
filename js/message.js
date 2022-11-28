@@ -29,6 +29,7 @@ const onOverlayClickError = (evt) => {
 };
 
 const showSuccessMessage = () => {
+  closeMessage();
   const successMessage = successMessageTemplate.cloneNode(true);
   document.addEventListener('click', onOverlayClickSucsess);
   document.addEventListener('keydown', onMessageEscKeydown, true);
@@ -38,6 +39,7 @@ const showSuccessMessage = () => {
 
 
 const showErrorMessage = () => {
+  closeMessage();
   const errorMessage = errorMessageTemplate.cloneNode(true);
   document.addEventListener('click', onOverlayClickError);
   document.addEventListener('keydown', onMessageEscKeydown, true);
@@ -47,7 +49,10 @@ const showErrorMessage = () => {
 
 function closeMessage() {
   const message = document.querySelector('.success') || document.querySelector('.error');
-  message.remove();
+
+  if(message) {
+    message.remove();
+  }
   document.removeEventListener('click', onOverlayClickSucsess);
   document.removeEventListener('click', onOverlayClickError);
   document.removeEventListener('keydown', onMessageEscKeydown, true);
